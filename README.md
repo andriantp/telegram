@@ -4,11 +4,12 @@ This repo provides a simple **telegram** bot application with **send** and **rec
 
 ## 🚀 Getting Started
 ```bash
-# 1. create bot with @BotFather
-# 2. copy token
-# 3. clone this git
+# 1. clone this git 
+# 2. create bot with @BotFather
+# 3. copy token
 # 4. paste token to Makefile
-# 5. make up
+# 5. open terminal:
+$ make up
 ```
 
 
