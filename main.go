@@ -10,11 +10,11 @@ import (
 func main() {
 	token := os.Getenv("token")
 	if token == "" {
-		log.Fatalf("token was requaired")
+		log.Fatalf("token was required")
 	}
 	setting := telegram.Setting{
 		Token:  token,
-		ChatID: -1,// for filter chatbot
+		ChatID: -1, // for filter chatbot
 	}
 
 	repo, err := telegram.Newtelegram(setting)
