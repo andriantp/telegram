@@ -1,0 +1,30 @@
+type UpdateConfig struct {
+	Offset         int
+	Limit          int
+	Timeout        int
+	AllowedUpdates []string
+}
+
+
+#### 1. `Offset int`
+- Tujuan: Untuk **menghindari menerima update yang sudah diproses sebelumnya**.
+- Cara kerja:
+  - Setiap update dari Telegram punya `UpdateID`.
+  - Jika kamu set `Offset = lastUpdateID + 1`, maka bot hanya akan menerima update baru setelah ID tersebut.
+  - Biasanya digunakan untuk *tracking* posisi update terakhir.
+
+#### 2. `Limit int`
+- Tujuan: Untuk **membatasi jumlah update yang dikirim oleh Telegram dalam satu request**.
+- Default: 100 (maksimal yang diizinkan oleh Telegram API).
+- Misal kamu ingin ambil hanya 10 update sekaligus → set `Limit: 10`.
+
+#### 3. `Timeout int`
+- Tujuan: **Durasi dalam detik untuk long polling**.
+- Jika tidak ada update, request akan "menggantung" selama `Timeout` detik sebelum kembali dengan respons kosong.
+- Misalnya: `Timeout: 60` → server Telegram akan menahan koneksi selama 60 detik sampai ada update, atau mengembalikan kosong setelah 60 detik.
+
+#### 4. `AllowedUpdates []string`
+- Tujuan: Untuk **membatasi jenis update** yang diterima bot.
+- Misalnya kamu hanya ingin menerima pesan teks (`"message"`), maka:
+  ```go
+  AllowedUpdates: []string{"message"}
